@@ -25,6 +25,28 @@ app.set('views', [
 app.use(express.static(path.resolve('./public')));
 app.set('view engine', 'ejs');
 
+//bodyParser
+app.use(express.urlencoded({ extended : false }));
+
+//Express session
+app.use(
+    session({
+        secret: 'keyboard cat',
+        resave: true,
+        saveUninitialized: true
+    })
+);
+
+//Connect flash
+app.use(flash());
+
+//Global variables
+app.use((req, res, next) => {
+    res.locals.success_message = req.flash('success_message');
+    res.locals.error_message = req.flash('error_message');
+    next();
+});
+
 //Routes
 app.use('/', require('./routes/index'));
 
