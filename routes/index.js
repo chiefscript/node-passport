@@ -1,7 +1,12 @@
 const express = require('express');
-
 const router  = express.Router();
+const { authGuard } = require('../config/guard');
 
-router.get('/', (req, res) => res.send('Hello world'));
+router.get('/index', authGuard, (req, res) => 
+    res.render('index', {
+        name : req.user.name,
+        layout : 'auth'
+    }
+));
 
 module.exports = router;
