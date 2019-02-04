@@ -3,6 +3,7 @@ const passwordValidator = require('password-validator');
 const router  = express.Router();
 const pwdValidator = new passwordValidator;
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 const User = require('../models/User');
 
@@ -28,7 +29,7 @@ router.post('/register', (req, res) => {
         errors.push({ message : 'Passwords do not match' });
     }
 
-    // Validate password
+    //Validate password
     var pwdErrors = pwdValidator.validate(password, { list : true });
 
     if (pwdErrors.indexOf('min')) {
@@ -99,5 +100,21 @@ router.post('/register', (req, res) => {
 
 //Login page
 router.get('/login', (req, res) => res.render('login', { layout : 'auth' }));
+
+//Login
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect : '/index',
+        failureRedirect : '/auth/login',
+        failureFlash : true
+    })(req, res, next);
+});
+
+//Logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_message', 'You have been logged out');
+    res.redirect('/auth/login');
+});
 
 module.exports = router;
