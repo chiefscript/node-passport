@@ -1,0 +1,50 @@
+<form action="/auth/register" class="login100-form validate-form" method="POST">
+    <span class="login100-form-title p-b-49">
+        Register
+    </span>
+
+    <% include ./partials/messages %>
+
+    <div class="wrap-input100 validate-input m-b-23" data-validate = "Name is reauired">
+        <span class="label-input100">Name</span>
+        <input class="input100" type="text" name="name" id="name" placeholder="Type your name" 
+                value="<%= typeof name != 'undefined' ? name : '' %>">
+        <span class="focus-input100" data-symbol="&#xf206;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input m-b-23" data-validate="Email is required">
+            <span class="label-input100">Email</span>
+            <input class="input100" type="text" id="email" name="email" placeholder="Type in your email" 
+                    value="<%= typeof email != 'undefined' ? email : '' %>">
+            <span class="focus-input100" data-symbol="&#xf190;"></span>
+        </div>
+
+    <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
+        <span class="label-input100">Password</span>
+        <input class="input100" type="password" name="password" placeholder="Type your password" 
+                value="<%= typeof password != 'undefined' ? password : '' %>">
+        <span class="focus-input100" data-symbol="&#xf190;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input m-b-23" data-validate="Password is required">
+        <span class="label-input100">Retype Password</span>
+        <input class="input100" type="password" name="password2" id="password2" placeholder="Retype your password" 
+                value="<%= typeof password2 != 'undefined' ? password2 : '' %>">
+        <span class="focus-input100" data-symbol="&#xf190;"></span>
+    </div>
+    
+    <div class="container-login100-form-btn m-b-23">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn">
+                Register
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-col-c">
+        <a href="/auth/login" class="txt2">
+            Already have an account?
+        </a>
+    </div>
+</form>
